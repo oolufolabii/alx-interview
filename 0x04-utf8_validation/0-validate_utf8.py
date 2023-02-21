@@ -42,7 +42,7 @@ def validUTF8(data):
             else:
                 return False
         elif data[i] & 0b11100000 == 0b11000000:
-            # 2-byte utf-8 character encoding
+            # 2-byte encoding
             byte_span = 2
             if data_len - i >= byte_span:
                 next_body = list(map(
