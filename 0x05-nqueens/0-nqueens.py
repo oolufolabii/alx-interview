@@ -4,9 +4,9 @@
 
 import sys
 
-possible_solutions = []
-# n = 0
-possible_position = None
+pos_sol = []
+j = 0
+pos_sol = None
 
 
 def user_input():
@@ -27,13 +27,33 @@ def user_input():
         print("N must be at least 4")
         sys.exit(1)
     return j
-
-def attacking_queen(position_1, position_2):
-	"""Checker for attacking position of the Queen.
-	Returns True if the queens are in an attacking
-	position else False."""
-	if ([position_1][0] == position_2[0]) or ([position_1][1] == position_2[1]):
-		return True
-	return abs([position_1][0] - position_2[0]) == abs([position_1][1] - position_2[1])
-
 # print(user_input())
+
+
+def attacking_queen(pos_1, pos_2):
+    """Checker for attacking position of the Queen.
+    Args: Both arguments are either a list or tuple.
+    Returns True if the queens are in an attacking
+    position else False."""
+    if (pos_1[0] == pos_2[0]) or (pos_1[1] == pos_2[1]):
+        return True
+    return abs(pos_1[0] - pos_2[0]) == abs(pos_1[1] - pos_2[1])
+# print(attacking_queen((2,4), (2,4)))
+
+
+def solution_check(options):
+    """Checking if the option exist in a list of possible
+    solutions.
+    Returns True if it exists, otherwise False."""
+    global pos_sol
+
+    for soln in pos_sol:
+        i = 0
+        for sol_pos in soln:
+            for opt_pos in options:
+                if sol_pos[0] == opt_pos[0] and sol_pos[1] == opt_pos[1]:
+                    i += 1
+
+            if i == j:
+                return True
+    return False
