@@ -27,3 +27,6 @@ def user_input():
         print("N must be at least 4")
         sys.exit(1)
     return j
+
+
+# print(user_input())
