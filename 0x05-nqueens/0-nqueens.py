@@ -6,7 +6,7 @@ import sys
 
 pos_sol = []
 j = 0
-pos_sol = None
+pos= None
 
 
 def user_input():
@@ -57,3 +57,25 @@ def solution_check(options):
             if i == j:
                 return True
     return False
+
+
+def create_solution(row, group):
+    """Creating a solution for the n queen problem"""
+
+    global pos_sol
+    global j
+
+    if row == j:
+        tmp0 = group.copy()
+        if not solution_check(tmp0):
+            pos_sol.append(tmp0)
+    else:
+        for col in range(j):
+            a = (row * j) + col
+            matches = zip(list([pos[a]]) * len(group), group)
+            used_positions = map(
+                lambda x: attacking_queen(x[0], x[1]), matches)
+            group.append(pos[a].copy())
+            if not any(used_positions):
+                create_solution(row + 1, group)
+            group.pop(len(group) - 1)
