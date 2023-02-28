@@ -6,7 +6,7 @@ import sys
 
 pos_sol = []
 j = 0
-pos= None
+pos = None
 
 
 def user_input():
@@ -81,7 +81,6 @@ def create_solution(row, group):
             group.pop(len(group) - 1)
 
 
-
 def get_solutions():
     """Gets the solutions for the given chessboard size.
     """
@@ -90,7 +89,8 @@ def get_solutions():
     n = 0
     group = []
     create_solution(n, group)
-    
+
+
 a = user_input()
 get_solutions()
 for solution in pos_sol:
