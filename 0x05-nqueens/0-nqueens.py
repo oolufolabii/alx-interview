@@ -79,3 +79,19 @@ def create_solution(row, group):
             if not any(used_positions):
                 create_solution(row + 1, group)
             group.pop(len(group) - 1)
+
+
+
+def get_solutions():
+    """Gets the solutions for the given chessboard size.
+    """
+    global pos, j
+    pos = list(map(lambda x: [x // j, x % j], range(j ** 2)))
+    n = 0
+    group = []
+    create_solution(n, group)
+    
+a = user_input()
+get_solutions()
+for solution in pos_sol:
+    print(solution)
