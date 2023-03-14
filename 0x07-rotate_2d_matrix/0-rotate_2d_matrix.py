@@ -32,4 +32,3 @@ def rotate_2d_matrix(matrix):
         if col == matrix_cols - 1 and row >= -1:
             matrix.pop(row)
         row -= 1
-    
