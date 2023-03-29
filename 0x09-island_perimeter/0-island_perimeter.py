@@ -1,6 +1,5 @@
 #!/usr/bin/python3
 """Python Module for Grid Perimeter"""
-from typing import List
 
 
 def island_perimeter(grid):
