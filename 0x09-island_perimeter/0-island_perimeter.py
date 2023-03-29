@@ -3,19 +3,30 @@
 from typing import List
 
 
-def island_perimeter(grid: List[List[int]]) -> int:
-    """Returns the perimeter of the island described in grid"""
+def island_perimeter(grid):
+    """returns the perimeter of the island described in grid"""
 
-    perimeter = 0
+    visited = set()
+
+    def depth_search(i, j):
+        """Counts the perimeter using depth search"""
+        if i >= len(grid) or j >= len(grid[0]) or \
+                i < 0 or j < 0 or grid[i][j] == 0:
+            return 1
+
+        if (i, j) in visited:
+            return 0
+
+        visited.add((i, j))
+
+        perimeter = depth_search(i, j+1)
+        perimeter += depth_search(i+1, j)
+        perimeter += depth_search(i, j-1)
+        perimeter += depth_search(i-1, j)
+
+        return perimeter
+
     for i in range(len(grid)):
-        for j in range(len(grid[i])):
-            if grid[i][j] == 1:
-                perimeter += 4
-                # cells with 2 sides touching other cells on top and bottom
-                if i > 0 and grid[i - 1][j] == 1:
-                    perimeter -= 2
-                # cells with 2 sides touching other cells left and right
-                if j > 0 and grid[i][j - 1] == 1:
-                    perimeter -= 2
-
-    return perimeter
+        for j in range(len(grid[0])):
+            if grid[i][j]:
+                return depth_search(i, j)
