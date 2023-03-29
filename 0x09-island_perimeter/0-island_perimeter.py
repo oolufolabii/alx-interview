@@ -6,27 +6,18 @@ from typing import List
 def island_perimeter(grid: List[List[int]]) -> int:
     """returns the perimeter of the island described in grid"""
 
-    visited = set()
-
-    def depth_search(i, j):
+    def search(matrix):
         """Counts the perimeter using depth search"""
-        if i >= len(grid) or j >= len(grid[0]) or \
-                i < 0 or j < 0 or grid[i][j] == 0:
-            return 1
+        count = 0
+        for row in matrix:
+            row = [0] + row + [0]
+            for i in range(1, len(row)):
+                count += row[i] != row[i-1]
+        return count
 
-        if (i, j) in visited:
-            return 0
+    tgrid = [[] for _ in range(len(grid[0]))]
+    for row in grid:
+        for i, item in enumerate(row):
+            tgrid[i].append(item)
 
-        visited.add((i, j))
-
-        perimeter = depth_search(i, j+1)
-        perimeter += depth_search(i+1, j)
-        perimeter += depth_search(i, j-1)
-        perimeter += depth_search(i-1, j)
-
-        return perimeter
-
-    for i in range(len(grid)):
-        for j in range(len(grid[0])):
-            if grid[i][j]:
-                return depth_search(i, j)
+    return search(grid) + search(tgrid)
