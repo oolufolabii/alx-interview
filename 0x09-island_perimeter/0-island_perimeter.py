@@ -9,6 +9,7 @@ def island_perimeter(grid: List[List[int]]) -> int:
     visited = set()
 
     def depth_search(i, j):
+        """Counts the perimeter using depth search"""
         if i >= len(grid) or j >= len(grid[0]) or \
                 i < 0 or j < 0 or grid[i][j] == 0:
             return 1
